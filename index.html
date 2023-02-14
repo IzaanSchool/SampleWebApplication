@@ -2834,8 +2834,7 @@
                         <div class="contact-form-wrapper">
                             <div class="introduce">
 
-                                <form class="rnt-contact-form rwt-dynamic-form row" id="contact-form" method="POST" action="https://izaanschool.net/html/izaan/mail.php">
-
+                                <form class="rnt-contact-form rwt-dynamic-form row" id="contact-form">
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="contact-name">Your Name</label>
@@ -3746,6 +3745,7 @@
 
     <!-- JS ============================================ -->
     <script src="assets/js/vendor/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/js/vendor/modernizer.min.js"></script>
     <script src="assets/js/vendor/feather.min.js"></script>
     <script src="assets/js/vendor/slick.min.js"></script>
@@ -3757,6 +3757,37 @@
     <script src="assets/js/vendor/jquery-one-page-nav.js"></script>
     <!-- main JS -->
     <script src="assets/js/main.js"></script>
+
+    <script>
+        const form = document.getElementById("contact-form");
+
+        console.log(form);
+        console.log("Hello World");
+  
+        form.addEventListener("submit", (event) => {
+          console.log("Buttton Clicked");
+          event.preventDefault();
+          console.log("Hello World");
+          const formData = new FormData(form);
+          console.log(formData);
+          const requestOptions = {
+            method: "POST",
+            body: formData
+          };
+
+          console.log(requestOptions)
+  
+          fetch("https://s0oxj48gi6.execute-api.us-east-1.amazonaws.com/dev/contact-with-me", requestOptions)
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              // Do something with the response data
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        });
+      </script>
 </body>
 
 
