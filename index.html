@@ -3772,7 +3772,12 @@
           console.log(formData);
           const requestOptions = {
             method: "POST",
-            body: formData
+            body:{
+                "id": "Helloworld",
+                "email": "email@email.com",
+                "key2": "value2",
+                "key3": "value3"
+                }
           };
 
           console.log(requestOptions)
