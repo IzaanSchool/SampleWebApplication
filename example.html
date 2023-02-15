@@ -33,11 +33,6 @@
         event.preventDefault();
    
 
-        const requestOptions = {
-          method: "POST",
-          body: {},
-          mode: 'cors'
-        };
 
         fetch("https://example.com/api/endpoint", requestOptions)
           .then(response => response.json())
