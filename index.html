@@ -4,10 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <!-- <meta http-equiv="x-ua-compatible" content="ie=edge"> -->
     <title>Jone Lee - Personal Portfolio</title>
+ 
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
+
+    <!-- <meta http-equiv="Content-Security-Policy" content="*"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
@@ -2869,9 +2873,13 @@
                                             <textarea name="contact-message" id="contact-message" cols="30" rows="10"></textarea>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="col-lg-12">
-                                        <button name="submit" type="submit" id="submit" class="rn-btn">
+                                        <p id="warning" style="color:red;margin:10px"></p>
+                                        <p id="success" style="color:green;margin:10px"> </p>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="button" id="submitButtonId"  onclick="sendMessageFunction()" class="rn-btn">
                                             <span>SEND MESSAGE</span>
                                             <i data-feather="arrow-right"></i>
                                         </button>
@@ -3745,7 +3753,7 @@
 
     <!-- JS ============================================ -->
     <script src="assets/js/vendor/jquery.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="assets/js/vendor/modernizer.min.js"></script>
     <script src="assets/js/vendor/feather.min.js"></script>
     <script src="assets/js/vendor/slick.min.js"></script>
@@ -3759,39 +3767,105 @@
     <script src="assets/js/main.js"></script>
 
     <script>
-        const form = document.getElementById("contact-form");
 
-        console.log(form);
-        console.log("Hello World");
-  
-        form.addEventListener("submit", (event) => {
-          console.log("Buttton Clicked");
-          event.preventDefault();
-          console.log("Hello World");
-          const formData = new FormData(form);
-          console.log(formData);
-          const requestOptions = {
-            method: "POST",
-            body:{
-                "id": "Helloworld",
-                "email": "email@email.com",
-                "key2": "value2",
-                "key3": "value3"
-                }
-          };
+        fetch('https://official-joke-api.appspot.com/random_joke')
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.log(error));
+// post Form data
+        function sendMessageFunction() {
+            document.getElementById("success").innerHTML = "";
+            document.getElementById("warning").innerHTML = "";
+            var currentDatetime = new Date().toLocaleString().toString("MM/DD/YYYY");
+            //console.log(currentDatetime);
+            var id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            var contactName = document.getElementById("contact-name").value;
+            var contactPhone = document.getElementById("contact-phone").value;
+            var contactEmail = document.getElementById("contact-email").value;
+            var subject = document.getElementById("subject").value;
+            var contactMessage = document.getElementById("contact-message").value;
+            if (contactName == "") {
+                document.getElementById("warning").innerHTML = "Please enter YOUR NAME";
+                return;
+            } else {
+                document.getElementById("warning").innerHTML = "";
+                // continue with your code here
+            }
+            if (contactPhone == "") {
+                document.getElementById("warning").innerHTML = "Please enter Phone";
+                return;
+            } else {
+                document.getElementById("warning").innerHTML = "";
+                // continue with your code here
+            }
 
-          console.log(requestOptions)
-  
-          fetch("https://s0oxj48gi6.execute-api.us-east-1.amazonaws.com/dev/contact-with-me", requestOptions)
+            if (contactEmail == "") {
+                document.getElementById("warning").innerHTML = "Please enter Email";
+                return;
+            } else {
+                document.getElementById("warning").innerHTML = "";
+                // continue with your code here
+            }
+
+            if (subject == "") {
+                document.getElementById("warning").innerHTML = "Please enter subject";
+                return;
+            } else {
+                document.getElementById("warning").innerHTML = "";
+                // continue with your code here
+            }
+
+            if (contactMessage == "") {
+                document.getElementById("warning").innerHTML = "Please enter message";
+                return;
+            } else {
+                document.getElementById("warning").innerHTML = "";
+                // continue with your code here
+            }
+
+            document.getElementById("success").innerHTML = "";
+            document.getElementById("warning").innerHTML = "";
+            document.getElementById("submitButtonId").disabled = true;
+            //console.log("myFunction");
+              fetch('https://s0oxj48gi6.execute-api.us-east-1.amazonaws.com/dev/contact-with-me', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:  JSON.stringify({
+                        id: id,
+                        contactName: contactName,
+                        contactPhone: contactPhone,
+                        email: contactEmail,
+                        subject: subject,
+                        contactMessage: contactMessage,
+                        date : currentDatetime
+                        
+                    })
+                })
             .then(response => response.json())
-            .then(data => {
-              console.log(data);
-              // Do something with the response data
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        });
+            .then(data => 
+              {
+                console.log(data);
+                if(data.IsSuccess =="YES"){
+                    document.getElementById("success").innerHTML = "Thank you! Your message has been successfully sent.";
+                    ClearFields();
+                }else{
+                    
+                    document.getElementById("warning").innerHTML = "Error occured! Please try again.";
+                }
+              })
+        }
+
+        function ClearFields(){
+            document.getElementById("submitButtonId").disabled = false;
+            document.getElementById("contact-name").value="";
+            document.getElementById("contact-phone").value="";
+            document.getElementById("contact-email").value="";
+            document.getElementById("subject").value="";
+            document.getElementById("contact-message").value="";
+            
+        }
       </script>
 </body>
 
