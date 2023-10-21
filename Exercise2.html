@@ -1,0 +1,33 @@
+<html><head>
+    <script LANGUAGE="JavaScript" type="text/javascript">
+    function display() {
+        DispWin = window.open( '','_blank', 'toolbar=no,status=no,width=800,height=400')
+        message = "<b>Field 1: </b>" + document.form1.Name.value + "<br>";
+        message += "<b>Field 2: </b>" + document.form1.field2.value + "<br>";
+        message += "<b>Field 3: </b>" + document.form1.field3.value + "<br>";
+        message += "<b>Field 4: </b>" + document.form1.field4.value + "<br>";
+        DispWin.document.write(message);
+    }
+    </script>
+    <style>
+        label {font-weight: bold;}
+    </style></head><body>
+    <div>
+        <form name="form1" style="width: 60%"> <h3>Sample</h3>
+            <fieldset>
+                <label>Field 1: </label><br><input type="text" name="Name"><br>
+                <label>Field 2: </label><br><input type="text" name="field2"><br>
+                <label>Field 3: </label><br><input type="text" name="field3"><br>
+                <label>Field 4</label><br><textarea name="field4" rows="5" cols="30"></textarea><br><br>
+
+                    <input type="submit" value="Submit" onclick="display();">
+                    <input type="reset" value="clear">
+                    <button formaction="class3b.html">HOME</button>
+
+            </fieldset>
+        
+        </form>
+    </div>
+    </body>
+
+</html>
