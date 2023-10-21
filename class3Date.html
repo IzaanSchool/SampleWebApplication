@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript new Date()</h2>
+
+
+<p id="demo"></p>
+
+<script>
+const d = new Date(2023, 11, 24, 10, 33, 30, 0); //manual format to print your defined date
+document.getElementById("demo").innerHTML = d;
+</script>
+
+
+<p id="demo1"></p>
+<script>
+const d1 = new Date("2015/03/25");
+document.getElementById("demo1").innerHTML = d1</script>
+
+<p id="demo2"></p>
+
+<script>
+const d2 = new Date();
+document.getElementById("demo2").innerHTML = d2;</script>
+
+<p>100000000000 milliseconds from Jan 1, 1970, is approximately Mar 3, 1973:
+<p id="demo3"></p>
+
+<script>
+const d3 = new Date(100000000000);
+document.getElementById("demo3").innerHTML = d3;
+</script>
+
+<p>Get the hours from a specific date:</p>
+<p id="demo4"></p>
+<script>
+const d4 = new Date();
+let hour = d4.getHours();
+document.getElementById("demo4").innerHTML = hour;
+</script>
+
+
+<p>getMonth() returns the month (from 0 to 11) of a date:</p>
+
+<p id="demo5"></p>
+
+<script>
+const d5 = new Date();
+let month = d5.getMonth();
+document.getElementById("demo5").innerHTML = month;
+</script>
+
+<p><strong>Note:</strong> 0=January, 1=February etc.</p>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+<head>
+ <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="container-fluid-content container-fluid">
+<form>
+
+            <div class="form-group">
+                <label for='fieldname'>Name: </label>
+                <input type='text' name='name' class='form-control' id='fieldname'>
+            </div>
+            <div class="form-group">
+                <label for='fieldzip'>Zip Code:</label>
+                <input type='text' name='zip' class='form-control' id='fieldzip'>
+            </div>
+            <div class="form-group">    
+                <label for='fieldopsys'>Favorite Color:</label>
+                <input type='text' name='favcolor' class='form-control' id='fieldfavcolor'>
+            </div>
+
+
+            <button type="button" class="btn btn-standard" data-toggle="modal" data-target="#myModal" id="submit">Submit</button>
+            <button type="reset" class="btn btn-standard" id="clear">Clear</button>
+
+</form>
+</div>  
+    <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Results</h4>
+            </div>
+            <div class="modal-body">
+              <strong>Name: </strong> <span class='results' id='name'></span><br>
+              <strong>Zip Code: </strong> <span class='results' id='zip'></span><br>
+              <strong>Favorite Color: </strong> <span class='results' id='favcolor'></span><br>
+          </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="jquery-3.1.1.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

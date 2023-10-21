@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form validation</title>
+	<style type="text/css">
+		body{
+			margin: auto;
+			font-family: ubuntu;
+			color: #f6f6f6;
+			background-color: #4e726b;
+		}
+		.cont{
+			margin: auto;
+			padding: 20px;
+			width: 500px;
+			background-color: lightblue;
+		}
+		table{
+			width: 100%;
+		}
+		td{
+			vertical-align: top;
+		}
+		input[type=text],input[type=Email],input[type=password],input[type=Number], select {
+		    width: 100%;
+		    padding: 5px 20px;
+		    display: inline-block;
+		    border: 1px solid #ccc;
+		    border-radius: 4px;
+		    box-sizing: border-box;
+		}
+		textarea {
+		    width: 100%;
+		    height: 150px;
+		    padding: 5px 20px;
+		    box-sizing: border-box;
+		    border: 2px solid #ccc;
+		    border-radius: 4px;
+		    background-color: #f8f8f8;
+		    resize: vertical;
+		}
+		input[type=submit] {
+		    width: 100%;
+		    background-color: #3b5998;
+		    color: white;
+		    padding: 14px 20px;
+		    margin: auto;
+		    border: none;
+		    border-radius: 4px;
+		    cursor: pointer;
+		}
+	</style>
+	<script type="text/javascript">
+		function Validate(){
+			if(document.myForm.Name.value==""){
+				alert("Please provide your name!");
+				document.myForm.Name.focus();
+				return false;
+			}
+			//Email Validation
+			if(document.myForm.EMail.value==""){
+				alert("Please provide your email id!");
+				document.myForm.EMail.focus();
+				return false;
+			}
+			var str = document.myForm.EMail.value;
+			var len=str.length;
+			var atcount=0;
+			var atpos;
+			var flag=1;
+			
+			for(i=0; i<len; i++){
+				if(str[i]=='@'){
+					atpos=i;
+					atcount++;
+				}
+				if(str[i]==' '){
+					alert("Email address doesn't contain space!");
+					document.myForm.EMail.focus();
+					return false;
+				}
+			}
+			if(atcount!=1 || str[len-1]=='.'|| str[len-2]=='.' || str[atpos+1]=="."){
+				alert("Invalid syntax!");
+				document.myForm.EMail.focus();
+				return false;
+			}
+			for(i=atpos; i<len; i++){
+				if(str[i]=="."){
+					flag=0;
+					break;
+				}
+			}
+			if(flag){
+				alert("Invalid syntax!");
+				document.myForm.EMail.focus();
+				return false;
+			}
+			//End of email validation
+			if(document.myForm.number.value.length!=10 || isNaN(document.myForm.number.value)){
+				alert("Please provide a valid Phone Number!");
+				document.myForm.number.focus();
+				return false;
+			}
+			if(document.myForm.Zip.value=="" ||document.myForm.Zip.value.length !=5){
+				alert("Please provide a zip code in the format #####");
+				document.myForm.Zip.focus();
+				return false;
+			}
+			if(document.myForm.Country.value=="-1"){
+				alert("Please provide your country.");
+				document.myForm.
+				Country.focus();
+				return false;
+			}
+			alert("Submission Successfull!");
+		}
+	</script>
+</head>
+<body>
+	<div class="cont">
+		<form onsubmit="return Validate()" name="myForm">
+			<fieldset>
+				<legend>Data Validation</legend>
+				<table cellpadding="5px;">
+					<tr>
+						<td>Name</td>
+						<td><input type="text" name="Name"></td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td><input type="text" name="EMail"></td>
+					</tr>
+					<tr>
+						<td>Number</td>
+						<td><input type="text" name="number"></td>
+					</tr>
+					<tr>
+						<td>Zip Code</td>
+						<td><input type="text" name="Zip"></td>
+					</tr>
+					<tr>
+						<td>Country</td>
+						<td><select name="Country">
+							<option value="-1" selected="true">[choose your country]</option>
+							<option value="1">USA</option>
+							<option value="2">India</option>
+							<option value="3">Bangladesh</option>
+						</select></td>
+					</tr>
+					<tr><td colspan="2" float="center"><input type="submit"></td></tr>
+				</table>
+			</fieldset>
+		</form>
+	</div>
+</body>
+</html>
+
+

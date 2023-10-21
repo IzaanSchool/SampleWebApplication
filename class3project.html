@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Picnic Registration Form - Test 10-20-2023</title>
+
+    <style>
+		label {
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		input[type=text], select {
+			padding: 5px;
+			width: 100%;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		input[type=checkbox] {
+			margin-right: 5px;
+		}
+
+		input[type=submit] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			margin-top: 10px;
+		}
+
+
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			background-color: #006699;
+			color: cyan;
+			padding: 10px;
+			text-align: center;
+		}
+
+		section {
+			margin: 20px;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			background-color: #f2f2f2;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 36px;
+		}
+
+		h2 {
+			margin: 0 0 10px 0;
+			font-size: 24px;
+		}
+
+		p {
+			line-height: 1.5;
+			margin-bottom: 10px;
+		}
+		label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type=text], select {
+  padding: 5px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=checkbox] {
+  margin-right: 5px;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+form {
+  margin: 0 auto;
+  width: 50%;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>Picnic 2025</h1>
+</header>
+
+<section>
+    <h2>Picnic Activities</h2>
+    <p>Celebrate summer with us at our annual Picnic Event! This year's picnic will be held at [Location] on [Date] from [Time]. The event is open to all ages and offers a wide range of fun activities for the whole family to enjoy.</p>
+    <p>Our picnic activities include:</p>
+    <ul>
+        <li>Barbecue with hamburgers, hotdogs, and veggie options</li>
+        <li>Various games and activities, such as frisbee, volleyball, and cornhole</li>
+        <li>Live music and entertainment</li>
+        <li>Raffle with amazing prizes</li>
+        <li>Cold drinks and snacks</li>
+    </ul>
+    <p>Tickets are just $10 for adults and children under 12 are free. Grab your picnic blanket, sunscreen, and your family and friends and join us for an unforgettable day. Register today!</p>
+</section>
+
+
+
+<form id="registration-form">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" name="phone" required>
+
+    <label for="adults">Number of Adults:</label>
+    <select id="adults" name="adults">
+        <option value="">Select number of adults</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+
+    <label for="children">Number of Children (under 12 years old):</label>
+    <select id="children" name="children">
+        <option value="">Select number of children</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+    <input type="submit" value="Submit">
+
+</form>
+
+<section>
+  <h5>Total number of registered member: <span id="totalMembers"></span></h5>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    
+    
+		$(document).ready(function() {
+
+            const apiUrl = 'https://s0oxj48gi6.execute-api.us-east-1.amazonaws.com/dev/getTotalRegistredMembers';
+            // Using the fetch() method with GET method
+            fetch(apiUrl).then(response => response.json()).then(data => 
+              {
+                console.log(data);
+                if(data.IsSuccess =="YES"){
+                  const result = JSON.parse(data.body);
+                  console.log(result);
+                  const mySpanElement = document.getElementById("totalMembers");
+                  mySpanElement.textContent = result.response;
+					           // alert('Application submitted successfully!');
+                      // window.location.reload();
+                }else{
+					        //alert('Error submitting application!');
+                }
+              })
+     
+     
+			$('#registration-form').submit(function(event) {
+				event.preventDefault();
+
+				var id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+				var name = $('#name').val();
+				var email = $('#email').val();
+				var phone = $('#phone').val();
+				var adults = $('#adults').val();
+				var children = $('#children').val();
+				var currentDate = new Date().toLocaleString().toString("MM/DD/YYYY");
+				fetch('https://s0oxj48gi6.execute-api.us-east-1.amazonaws.com/dev/event-registration', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:  JSON.stringify({
+                        id: id,
+                        name: name,
+                        phone: phone,
+                        email: email,
+                        adults: adults,
+                        children: children,
+                        date : currentDate
+                        
+                    })
+                })
+            .then(response => response.json())
+            .then(data => 
+              {
+                console.log(data);
+                if(data.IsSuccess =="YES"){
+					            alert('Application submitted successfully!');
+                      window.location.reload();
+                }else{
+					        alert('Error submitting application!');
+                }
+              })
+
+
+				// $.ajax({
+				// 	url: 'https://s0oxj48gi6.execute-api.us-east-1.amazonaws.com/dev/contact-with-me',
+				// 	type: 'POST',
+				// 	data: {
+				// 		name: name,
+				// 		email: email,
+				// 		phone: phone,
+				// 		adults: adults,
+				// 		children:children
+				// 	},
+				// 	success: function(response) {
+				// 		alert('Application submitted successfully!');
+				// 	},
+				// 	error: function(xhr, status, error) {
+				// 		alert('Error submitting application!');
+				// 	}
+				// });
+			});
+		  });
+	</script>
+</body>
+</html>
